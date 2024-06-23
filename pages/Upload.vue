@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
     data() {
@@ -49,7 +49,7 @@ export default {
             formData.append('version', this.version)
             formData.append('file', this.file)
         
-            const res = await axios.post('/api/file-server/upload', formData)
+            const res = await this.$axios.$post('/api/file-server/upload', formData)
             const data = res.data
             if (!data.errorr) {
                 this.fileList = data

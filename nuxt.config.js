@@ -1,28 +1,11 @@
-const os = require('os')
-const networkInterfaces = os.networkInterfaces()
-
-const getLocalExternalIp = () => {
-  for (const interfaceName in networkInterfaces) {
-    const addresses = networkInterfaces[interfaceName]
-    for (const i in addresses) {
-      const address = addresses[i]
-      if (address.family === 'IPv4' && !address.internal) {
-        return address.address
-      }
-    }
-  }
-  return 'localhost'
-}
-
-const localIp = getLocalExternalIp()
-const apiUrl = `http://${localIp}:3000`
+require('dotenv').config()
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
   server: {
-    host: '0.0.0.0',
+    // host: '0.0.0.0',
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -35,7 +18,8 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+      { httpEquiv: "Content-Security-Policy", content: "upgrade-insecure-requests" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -67,7 +51,7 @@ export default {
   ],
 
   axios: {
-    baseURL: apiUrl,
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://laon2.dimad.site',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
