@@ -57,7 +57,7 @@ router.get('/files/:project', (req, res) => {
 
     if(fs.existsSync(directoryPath)) {
         fs.readdir(directoryPath, (err, files) => {
-            if (err) {
+            if (err) { 
                 console.error(err)
                 return res.status(500).json({ error: '파일을 찾을 수 없음'})
             }

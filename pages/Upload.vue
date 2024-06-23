@@ -5,7 +5,7 @@
         <b-button @click="goToDownload" class="mb-3">다운로드 페이지로 이동</b-button>
         <b-form-select :options="projects" v-model="project" @change="fetchFileList" class="mb-3"></b-form-select>
         <b-card v-if="fileList.length > 0" class="mb-3">
-            <h6>파일</h6>
+            <h5>파일</h5>
             <div v-for="file in fileList" :key="file">{{ file }}</div>
         </b-card>
         <b-form-input v-model="version" class="mb-3" placeholder="버전 입력"></b-form-input>
@@ -17,8 +17,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
-
 export default {
     data() {
         return {
@@ -50,16 +48,16 @@ export default {
             formData.append('file', this.file)
         
             const res = await this.$axios.$post('/api/file-server/upload', formData)
-            const data = res.data
-            if (!data.errorr) {
-                this.fileList = data
+            if (!res.errorr) {
+                this.fileList = res
             }
         },
 
         async fetchFileList() {
             if (this.project) {
                 const res = await this.$axios.$get(`/api/file-server/files/${this.project}`)
-                this.fileList = res
+                if (res) this.fileList = res
+                else this.fileList = []
             }
         },
 

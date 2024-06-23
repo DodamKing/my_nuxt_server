@@ -19,7 +19,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
-      { httpEquiv: "Content-Security-Policy", content: "upgrade-insecure-requests" }
+      // { httpEquiv: "Content-Security-Policy", content: "upgrade-insecure-requests" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -48,11 +48,24 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
   ],
 
   axios: {
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://laon2.dimad.site',
+    // baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://laon2.dimad.site',
+    // proxy: true,
+    baseURL: '/',
+    // proxyHeaders: false,
+    // credentials: false,
   },
+
+  // proxy: {
+  //   '/api/': {
+  //     target: '/',
+  //     pathRewrite: { '^/api': '' },
+  //     changeOrigin: true
+  //   }
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

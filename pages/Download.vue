@@ -45,7 +45,8 @@ export default {
         async fetchFileList () {
             if (this.project) {
                 const res = await this.$axios.$get(`/api/file-server/files/${this.project}`)
-                this.fileList = res
+                if (res) this.fileList = res
+                else this.fileList = []
             }
         },
 
