@@ -5,7 +5,7 @@ export default {
   ssr: false,
 
   server: {
-    // host: '0.0.0.0',
+    host: '0.0.0.0',
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -19,7 +19,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
-      // { httpEquiv: "Content-Security-Policy", content: "upgrade-insecure-requests" }
+      { 'http-equiv': "Content-Security-Policy", content: "upgrade-insecure-requests" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -52,16 +52,16 @@ export default {
   ],
 
   axios: {
-    // baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://laon2.dimad.site',
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://laon2.dimad.site',
     // proxy: true,
-    baseURL: '/',
+    // baseURL: '/',
     // proxyHeaders: false,
     // credentials: false,
   },
 
   // proxy: {
   //   '/api/': {
-  //     target: '/',
+  //     target: 'http',
   //     pathRewrite: { '^/api': '' },
   //     changeOrigin: true
   //   }
