@@ -52,7 +52,7 @@ export default {
   ],
 
   axios: {
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://172.31.39.116:3000',
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'http://172.31.39.116:3000',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
