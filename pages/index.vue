@@ -8,8 +8,6 @@
 
 <script>
 export default {
-	// name: 'IndexPage',
-
 	methods: {
 		goToUpload() {
 			this.$router.push({ name: 'upload'})

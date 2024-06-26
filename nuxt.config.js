@@ -1,12 +1,6 @@
-require('dotenv').config()
-
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
-
-  server: {
-    host: '0.0.0.0',
-  },
+  ssr: true,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -19,7 +13,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
-      { 'http-equiv': "Content-Security-Policy", content: "upgrade-insecure-requests" }
+      // { 'http-equiv': "Content-Security-Policy", content: "upgrade-insecure-requests" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -48,18 +42,17 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
+    // '@nuxtjs/proxy',
   ],
 
   axios: {
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'http://172.31.39.116:3000',
+    baseURL: '/',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: [({ isLegacy }) => isLegacy && 'axios']
   },
-
-  target: 'static',
 
   serverMiddleware: [
     { path: '/api', handler: '~/api/index.js' }
