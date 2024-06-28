@@ -3,6 +3,7 @@
         <h1 class="mt-5 mb-5">파일 업로드</h1>
         <b-button variant="success" class="mb-3" @click="$router.push({ name: 'index' })">홈</b-button>
         <b-button @click="goToDownload" class="mb-3">다운로드 페이지로 이동</b-button>
+        <b-button variant="primary" @click="showModal = true" class="mb-3">프로젝트 추가</b-button>
         <b-form-select :options="projects" v-model="project" @change="fetchFileList" class="mb-3"></b-form-select>
         <b-card v-if="fileList.length > 0" class="mb-3">
             <h5>파일</h5>
@@ -13,22 +14,49 @@
         <div class="d-flex justify-content-end">
             <b-button variant="primary" @click="handleUpload">파일 업로드</b-button>
         </div>
+
+        <Modal :show="showModal" @close="showModal = false">
+            <template #header>
+                <h4>새 프로젝트 추가</h4>
+            </template>
+            <template #body>
+                <b-input v-model="newProject.value" placeholder="값 입력" />
+                <b-input v-model="newProject.text" placeholder="텍스트 입력" class="mt-3" />
+            </template>
+            <template #footer>
+                <b-button variant="success" @click="addProject">추가</b-button>
+                <b-button variant="danger" @click="showModal = false">취소</b-button>
+            </template>
+        </Modal>
     </b-container>
 </template>
 
 <script>
+import Modal from '~/components/Modal.vue'
+
 export default {
+    components: {
+        Modal
+    },
+
+    computed: {
+        projects() {
+            return this.$store.state.projects
+        }
+    },
+
+    mounted() {
+        this.$store.dispatch('fetchProject')
+    },
+
     data() {
         return {
             project: '',
             file: null,
-            projects: [
-                { value: '', text: '프로젝트 선택' },
-                { value: 'stock-master', text: '자산관리' },
-                { value: 'customer', text: '고객관리' },
-            ],
             version: '',
             fileList: [],
+            showModal: false,
+            newProject: { value: '', text: '' }
         }
     },
 
@@ -63,7 +91,31 @@ export default {
 
         goToDownload() {
             this.$router.push({ name: 'download'})
+        },
+
+        updateProjects(projects) {
+            this.$store.dispatch('updateProjects', { projects })
+        },
+
+        addProject() {
+            if (this.newProject.text && this.newProject.value) {
+                const newProject = {
+                    value: this.newProject.value,
+                    text: this.newProject.text,
+                }
+                this.$store.dispatch('addNewProject', newProject)
+                this.resetNewProject()
+                this.showModal = false
+            } else {
+                alert('텍스트와 값을 모두 입력해주세요.')
+            }
+        },
+
+        resetNewProject() {
+            this.newProject.value = ''
+            this.newProject.text = ''
         }
+
     }
 }
 </script>

@@ -1,0 +1,18 @@
+[
+  {
+    "value": "",
+    "text": "프로젝트 선택"
+  },
+  {
+    "value": "stock-master",
+    "text": "자산관리"
+  },
+  {
+    "value": "customer",
+    "text": "고객관리"
+  },
+  {
+    "value": "bird1",
+    "text": "플래피버드"
+  }
+]

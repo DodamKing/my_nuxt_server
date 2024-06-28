@@ -28,15 +28,25 @@ export default {
         ConfirmModal
     },
 
+    computed: {
+        projects() {
+            return this.$store.state.projects
+        }
+    },
+
+    mounted() {
+        this.$store.dispatch('fetchProject')
+    },
+
     data() {
         return {
             project: '',
             fileList: [],
-            projects: [
-                { value: '', text: '프로젝트 선택' },
-                { value: 'stock-master', text: '자산관리' },
-                { value: 'customer', text: '고객관리' },
-            ],
+            // projects: [
+            //     { value: '', text: '프로젝트 선택' },
+            //     { value: 'stock-master', text: '자산관리' },
+            //     { value: 'customer', text: '고객관리' },
+            // ],
             fileToDelete: null,
         }
     },

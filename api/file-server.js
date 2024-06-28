@@ -103,4 +103,22 @@ router.get('/version/:project', async (req, res) => {
     res.json({ version })
 })
 
+router.post('/add-project', async (req, res) => {
+    let resultCode = 0, jsonData
+    try {
+        const newProject = req.body
+        const filepath = path.join(__dirname, '../static', 'projects.json')
+        const json = fs.readFileSync(filepath)
+        jsonData = JSON.parse(json)
+        jsonData.push(newProject)
+
+        fs.writeFileSync(filepath, JSON.stringify(jsonData, null, 2))
+
+        resultCode = 1
+    } catch (err) {
+        console.error(err)
+    }
+    res.json({ resultCode, projects: jsonData })
+})
+
 module.exports = router
