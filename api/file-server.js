@@ -121,4 +121,18 @@ router.post('/add-project', async (req, res) => {
     res.json({ resultCode, projects: jsonData })
 })
 
+router.delete('/project/:id', async (req, res) => {
+    const id = req.params.id
+
+    const filepath = path.join(__dirname, '../static', 'projects.json')
+    const json = fs.readFileSync(filepath)
+    let jsonData = JSON.parse(json)
+
+    jsonData = jsonData.filter(item => item.id !== (id * 1))
+
+    fs.writeFileSync(filepath, JSON.stringify(jsonData, null, 2))
+
+    res.json({ projects: jsonData })
+})
+
 module.exports = router

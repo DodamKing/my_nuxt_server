@@ -4,15 +4,18 @@
     "text": "프로젝트 선택"
   },
   {
+    "id": 1,
     "value": "stock-master",
     "text": "자산관리"
   },
   {
+    "id": 2,
     "value": "customer",
     "text": "고객관리"
   },
   {
-    "value": "bird1",
+    "id": 1719666098687,
+    "value": "brid1",
     "text": "플래피버드"
   }
 ]

@@ -61,11 +61,11 @@ export default {
   router: {
     extendRoutes(routes, resolve) {
       routes.push(
-        {
-          name: 'index',
-          path: '/',
-          component: resolve(__dirname, 'pages/index.vue')
-        },
+        // {
+        //   name: 'index',
+        //   path: '/',
+        //   component: resolve(__dirname, 'pages/index.vue')
+        // },
         {
           name: 'upload',
           path: '/upload',

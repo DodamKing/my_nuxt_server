@@ -23,5 +23,14 @@ export const actions = {
         } catch (err) {
             console.error(err)
         }
+    },
+
+    async deleteProject({ commit }, id) {
+        try {
+            const { projects } = await this.$axios.$delete('/api/file-server/project/' + id)
+            commit('setProject', projects)
+        } catch (err) {
+            console.error(err)
+        }
     }
 }
